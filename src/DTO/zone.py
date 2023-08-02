@@ -4,4 +4,4 @@ class Zone:
         self.nom_zone = nom_zone
 
     def __str__(self) -> str:
-        return self.nom_zone
+        return "{0}".format(self.nom_zone)
