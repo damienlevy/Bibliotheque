@@ -1,6 +1,4 @@
-from DTO.livre import Livre
-from DTO.zone import Zone
-from DTO.bibliotheque import Bibliotheque
+from bibliotheque import Bibliotheque, Zone, Livre
 
 
 if __name__ == '__main__':
