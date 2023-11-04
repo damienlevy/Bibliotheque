@@ -5,13 +5,6 @@ from bibliotheque import Bibliotheque
 class User(BaseModel):
     pseudo:str
     password:str
-    # list_bibliotheque: list[Bibliotheque]
-
-    # def __init__(self, pseudo:str, password:str) -> None:
-    #     self.pseudo = pseudo
-    #     self.password = password
-    #     self.list_bibliotheque = list()
-    
 
 class Users(BaseModel):
     users:list[User]

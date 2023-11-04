@@ -37,17 +37,14 @@ class Bibliotheque(BaseModel):
     nom: Nom de la bibliothèque
     list_livres: Liste des livres présent dans la bibliothèque
     zone: Zone ou se trouve la bibliothèque
+    proprietaire: Créateur et proprietaire de la bibliothèque
     """
     nom: str
     list_livres: list[Livre]
     zone: Zone
+    prorietaire:User
 
-    # def __init__(self, nom: str, list_livres:list[Livre]|None, zone:Zone|None) -> None:
-    #     self.nom = nom.title()
-    #     self.list_livres = list_livres
-    #     self.zone = zone
-
-    def list_to_string(self) -> str:
+    def _list_to_string(self) -> str:
         s = "["
         for livre in self.list_livres:
             s += str(livre)
@@ -80,31 +77,15 @@ class Bibliotheque(BaseModel):
 
 
 class Bibliotheques(BaseModel):
-    """Représentation d'une liste de bibliothèque créée par un utilisateur
+    """Représentation d'une liste de bibliothèque accessible par un utilisateur
     Attribut
     --------
-    proprietaire: Créateur et proprietaire des bibliothèques
-    liste_biblio: Liste des bibliothèques appartenant à un user
+    user: utilisateur
+    liste_biblio: Liste des bibliothèques accessible à l'utilisateur
     """
-    prorietaire:User
+    user:User
     liste_biblio: list[Bibliotheque]
 
-if __name__ == '__main__':
-    harry_potter = Livre("Harry potter", "JK ROWLING")
-    ne_le_dis_a_personne = Livre("Ne le dis à personne", "Harlan Koben")
-    titeuf = Livre("Titeuf","ZEP")
-    livres = [harry_potter,ne_le_dis_a_personne]
-    bibliotheque = Bibliotheque("test",livres,Zone("bureau"))
-    print(bibliotheque)
-    bibliotheque.add_livre(titeuf)
-    print("add titeuf : ")
-    print(bibliotheque)
-    bibliotheque.remove_livre_by_title("Titeuf")
-    print("remove titeuf")
-    print(bibliotheque)
-    list_harlan_coben = bibliotheque.get_livre_by_auteur("harlan Koben")
-    for livre in list_harlan_coben:
-        print(livre)
-    bibliotheque2 = Bibliotheque("test2",[],Zone("chambre"))
-    bibliotheque2.add_livres(list_harlan_coben)
-    print(bibliotheque2)
+    def add_bibliotheque(self, biblio:Bibliotheque):
+        self.liste_biblio.append(biblio)
+    
